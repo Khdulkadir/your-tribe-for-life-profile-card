@@ -1,5 +1,16 @@
 <script>
   export let data;
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    const script = document.createElement('script');
+    script.src = '/car.js';
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script); // Clean up if the component is destroyed
+    };
+  });
 </script>
 
 <main>
@@ -26,6 +37,7 @@
         <div class="car-seat"></div>
         <div class="car-base"></div>
         <div class="head-light"></div>
+        <div class="rear-light"></div>
       </div>
       <div class="wheel-left wheel">
         <div class="wheel-spike"></div> 
@@ -50,6 +62,29 @@
         <div class="tree-bottom"></div>
       </div>
     </article>
+  <article class="mountain-container">
+    <div class="mountain">
+      <div class="mountain-top">
+        <div class="mountain-cap-1"></div>
+        <div class="mountain-cap-2"></div>
+        <div class="mountain-cap-3"></div>
+      </div>
+    </div>
+    <div class="mountain-two">
+      <div class="mountain-top">
+        <div class="mountain-cap-1"></div>
+        <div class="mountain-cap-2"></div>
+        <div class="mountain-cap-3"></div>
+      </div>
+    </div>
+    <div class="mountain-three">
+      <div class="mountain-top">
+        <div class="mountain-cap-1"></div>
+        <div class="mountain-cap-2"></div>
+        <div class="mountain-cap-3"></div>
+      </div>
+    </div>
+  </article>
 
   </div>
   <div class="ground">
@@ -121,10 +156,27 @@
     position: absolute;
     bottom: 30px;
     left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    transition: 1s;
+    --translateX: -50%; /* Default value for translateX */
+    transform: translateX(var(--translateX)) translateY(0);
+    z-index: 3;
+    transition: 0.3s;
   }
+
+  :global(article.car.jump) {
+    animation: jumpAnimation 0.5s ease;
+  }
+
+@keyframes jumpAnimation {
+  0% {
+    transform: translateX(var(--translateX)) translateY(0);
+  }
+  50% {
+    transform: translateX(var(--translateX)) translateY(-100px); /* Jump up */
+  }
+  100% {
+    transform: translateX(var(--translateX)) translateY(0); /* Return to ground */
+  }
+}
 
   div.car-window{
     background: darkred;
@@ -181,6 +233,16 @@
     position: absolute;
     background: #e2dfcb;
     right: 1px;
+    top: 6px;
+    border-radius: 50% 15px 15px 50%;
+    width: 10px;
+    height: 20px;
+  }
+
+  .rear-light{
+    position: absolute;
+    background: red;
+    left: 1px;
     top: 6px;
     border-radius: 50% 15px 15px 50%;
     width: 10px;
@@ -261,7 +323,8 @@
     position: absolute;
     bottom: 0;
     right: -20%;
-    animation: moveTrees 3.7s infinite linear;
+    animation: moveTrees 5s infinite linear;
+    z-index: 2;
   }
 
   article.tree.small {
@@ -312,7 +375,52 @@
 
   @keyframes moveTrees {
     from {right: -20%;}
-    to {right: 120%;}
+    to {right: 200%;}
   } 
 
+  article.mountain-container {
+    position: absolute;
+    bottom: 0;
+    right: -20%;
+    animation: moveTrees 10s infinite linear;
+  }
+
+.mountain, .mountain-two, .mountain-three {
+    position: absolute;
+    bottom: 0;
+    border-left: 250px solid transparent;
+    border-right: 250px solid transparent;
+    border-bottom: 280px solid #7ac1e4;
+    z-index: 1;
+}
+.mountain-two { 
+    left: 80px;
+    bottom: -20px;
+    opacity: .3;
+    z-index: 0;
+}
+.mountain-three {
+    left: -60px;
+    bottom:-10px;
+    opacity: .5;
+    z-index: 0;
+}
+.mountain-top {
+    position: absolute;
+    right: -65px;
+    border-left: 65px solid transparent;
+    border-right: 65px solid transparent;
+    border-bottom: 77px solid #ceeaf6;
+    z-index: 2;
+}
+.mountain-cap-1, .mountain-cap-2, .mountain-cap-3 {
+    position: absolute;
+    top: 70px;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-top: 25px solid #ceeaf6;
+}
+.mountain-cap-1 { left: -55px; }
+.mountain-cap-2 { left: -25px; }
+.mountain-cap-3 { left: 5px; }
 </style>
