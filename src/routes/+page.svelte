@@ -1,17 +1,41 @@
 <script>
   export let data;
-  import { onMount } from 'svelte';
 
-  onMount(() => {
-    const script = document.createElement('script');
-    script.src = '/car.js';
-    document.body.appendChild(script);
+  let translateX = -50; // Initial translateX value
+  let carElement;
 
-    return () => {
-      document.body.removeChild(script); // Clean up if the component is destroyed
-    };
-  });
+  // Function to handle the keydown event
+  function handleKeydown(event) {
+    // Check if the pressed key is the right arrow or 'd' key
+    if (event.key === 'ArrowRight' || event.key === 'd') {
+      translateX = Math.min(translateX + 10, 100); // Increase by 10%, max 100%
+    }
+
+    // Check if the pressed key is the left arrow or 'a' key
+    if (event.key === 'ArrowLeft' || event.key === 'a') {
+      translateX = Math.max(translateX - 10, -200); // Decrease by 10%, min -200%
+    }
+
+    // Check if the spacebar is pressed
+    if (event.code === 'Space') {
+      carElement.classList.add('jump'); // Add the 'jump' class
+      setTimeout(() => {
+        carElement.classList.remove('jump'); // Remove the 'jump' class after 500ms
+      }, 500); // Adjust the duration as needed
+    }
+  };
+  
+  $: if (carElement) {
+    carElement.style.setProperty('--translateX', `${translateX}%`);
+  }
+
+  function showProfileInfo(event) {
+    const profileInfo = document.querySelector('.profile-info');
+    profileInfo.classList.toggle('show');
+  };
 </script>
+
+<svelte:window on:keydown={handleKeydown}/>
 
 <main>
   <div class="sky">
@@ -30,7 +54,7 @@
       </div>
     </article>
 
-    <article class="car"> 
+    <article class="car" bind:this={carElement}> 
       <div class="car-inner">
         <div class="car-window"></div>
         <div class="car-steer"></div>
@@ -38,6 +62,16 @@
         <div class="car-base"></div>
         <div class="head-light"></div>
         <div class="rear-light"></div>
+        <div class="car-exhaust"></div>
+        <button on:click={showProfileInfo} class="profile-picture-container">
+          <img class="profile-picture" src="/profiel-foto.svg" alt="profiel foto" width="50" height="50"/>
+          <div class="profile-info">
+            <img class="mugshot" src="/mugshot.jpg" alt="mugshot" width="100" height="100"/>
+            <h1 class="name">{data.persons.name} {data.persons.surname}</h1>
+            <p class="nickname">{data.persons.nickname}</p>
+            <a class="github" href={data.persons.website} target="_blank">Github</a>
+          </div>
+        </button>
       </div>
       <div class="wheel-left wheel">
         <div class="wheel-spike"></div> 
@@ -156,7 +190,7 @@
     position: absolute;
     bottom: 30px;
     left: 50%;
-    --translateX: -50%; /* Default value for translateX */
+    --translateX: -50%;
     transform: translateX(var(--translateX)) translateY(0);
     z-index: 3;
     transition: 0.3s;
@@ -166,17 +200,106 @@
     animation: jumpAnimation 0.5s ease;
   }
 
-@keyframes jumpAnimation {
-  0% {
-    transform: translateX(var(--translateX)) translateY(0);
+  @keyframes jumpAnimation {
+    0% {
+      transform: translateX(var(--translateX)) translateY(0);
+    }
+    50% {
+      transform: translateX(var(--translateX)) translateY(-100px); /* Jump up */
+    }
+    100% {
+      transform: translateX(var(--translateX)) translateY(0); /* Return to ground */
+    }
   }
-  50% {
-    transform: translateX(var(--translateX)) translateY(-100px); /* Jump up */
+
+  /* @keyframes wiggleAnimation {
+    0% {
+      transform: scale(1) scaleX(-1);
+    }
+    100% {
+      transform: scale(1.5) scaleX(-1);
+    }
+  } */
+
+  button.profile-picture-container {
+    position: absolute;
+    top: -50px;
+    right: 130px;
+    z-index: -1;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: transparent;
+    border: none;
   }
-  100% {
-    transform: translateX(var(--translateX)) translateY(0); /* Return to ground */
+
+  img.profile-picture {
+    transform: scaleX(-1);
+    /* animation: alternate wiggleAnimation 1s infinite; */
+    position: relative;
+    transition: 0.3s;
   }
-}
+
+  img.profile-picture:hover {
+    transform: scaleX(-1) scale(1.4);
+  }
+
+  .profile-info {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: #ffd;
+    font-family: "Comic Neue", sans-serif;
+    position: absolute;
+    background-color: #ffd;
+    border-radius: 100%;
+    border: solid 5px #000;
+    bottom: 150px;
+    cursor: initial;
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+  :global(div.profile-info.show) {
+    opacity: 1 !important;
+  }
+
+
+  .profile-info::before {
+    width: 40%;
+    height: 100%;
+    bottom: -51%;
+    border-radius: 50%;
+    left: 10%;
+    box-shadow: 0.5vmin 0, 2vmin -0.5vmin #ffd, 2vmin -0.5vmin 0 0.5vmin;
+    clip-path: polygon(0% 49%, 150% 48%, 150% 100%, 0% 100%);
+    content: "";
+    display: block;
+    position: absolute;
+  }
+
+  div.profile-info p, div.profile-info a {
+    font-size: 16px;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  div.profile-info h1 {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  div.profile-info img {
+    border-radius: 100%;
+    object-fit: cover;
+    height: 120px;
+    width: 120px;
+    margin-bottom: 10px;
+  }
 
   div.car-window{
     background: darkred;
@@ -247,6 +370,16 @@
     border-radius: 50% 15px 15px 50%;
     width: 10px;
     height: 20px;
+  }
+
+  div.car-exhaust {
+    width: 20px;
+    height: 10px;
+    position: absolute;
+    left: -20px;
+    bottom: 10px;
+    background-color: gray;
+  box-shadow: -1px 0px 3px #000;
   }
 
   @keyframes rotateWheel {
