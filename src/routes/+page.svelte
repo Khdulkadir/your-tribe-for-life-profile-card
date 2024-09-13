@@ -239,8 +239,21 @@
     transition: 0.3s;
   }
 
+  button.profile-picture-container::after {
+    width: 55px;
+    height: 55px;
+    content: "";
+    border-radius: 100%;
+    box-shadow: 0px 1px 1px blue;
+    animation: rotateWheel 1.7s infinite linear;
+    position: absolute;
+    left: 5px;
+    top: -8px;
+    z-index: -1;
+  }
+
   img.profile-picture:hover {
-    transform: scaleX(-1) scale(1.4);
+    transform: scaleX(-1) scale(1.2);
   }
 
   .profile-info {
