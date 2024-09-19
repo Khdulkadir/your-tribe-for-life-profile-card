@@ -122,10 +122,39 @@
 
   </div>
   <div class="ground">
+    <div class="keys-container">
+      <p class="left-arrow">←</p>
+      <p class="right-arrow">→</p>
+      <p class="spacebar">Space</p>
+    </div>
   </div>
 </main>
 
 <style>
+  div.keys-container {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-family: 'Comic Neue', sans-serif;
+  }
+
+  p.left-arrow, p.right-arrow {
+    font-size: 25px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    margin: 0;
+  }
+
+  p.spacebar {
+    font-size: 25px;
+    background-color: #f8f8f8;
+    padding: 10px 80px;
+    margin: 0;
+  }
+
   main {
     max-height: 100vh;
     max-width: 100vw;
@@ -212,15 +241,6 @@
     }
   }
 
-  /* @keyframes wiggleAnimation {
-    0% {
-      transform: scale(1) scaleX(-1);
-    }
-    100% {
-      transform: scale(1.5) scaleX(-1);
-    }
-  } */
-
   button.profile-picture-container {
     position: absolute;
     top: -50px;
@@ -234,7 +254,6 @@
 
   img.profile-picture {
     transform: scaleX(-1);
-    /* animation: alternate wiggleAnimation 1s infinite; */
     position: relative;
     transition: 0.3s;
   }
@@ -244,7 +263,7 @@
     height: 55px;
     content: "";
     border-radius: 100%;
-    box-shadow: 0px 1px 1px blue;
+    box-shadow: 0px 5px 5px yellow;
     animation: rotateWheel 1.7s infinite linear;
     position: absolute;
     left: 5px;
@@ -286,7 +305,7 @@
     bottom: -51%;
     border-radius: 50%;
     left: 10%;
-    box-shadow: 0.5vmin 0, 2vmin -0.5vmin #ffd, 2vmin -0.5vmin 0 0.5vmin;
+    box-shadow: 1px 0, 8px -1px #ffd, 8px -1px 0 1px;
     clip-path: polygon(0% 49%, 150% 48%, 150% 100%, 0% 100%);
     content: "";
     display: block;
@@ -569,4 +588,11 @@
 .mountain-cap-1 { left: -55px; }
 .mountain-cap-2 { left: -25px; }
 .mountain-cap-3 { left: 5px; }
+
+@media screen and (max-width: 500px) {
+  div.keys-container {
+    right: 10px;
+    justify-content: center;
+  }
+}
 </style>
