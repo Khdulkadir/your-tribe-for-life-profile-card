@@ -426,7 +426,7 @@
     border-radius: 50%;
     background: black;
     position: absolute;
-    border: 4px solid black;
+    border: 1px solid black;
     animation: rotateWheel 0.7s infinite linear;
   }
 
