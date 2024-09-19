@@ -40,19 +40,19 @@
 <main>
   <div class="sky">
 
-    <article class="cloud">
+    <div class="cloud">
       <div class="cloud-inner">
         <div class="small"></div>
         <div class="large"></div>
       </div>
-    </article>
+    </div>
 
-    <article class="cloud">
+    <div class="cloud">
       <div class="cloud-inner">
         <div class="small"></div>
         <div class="large"></div>
       </div>
-    </article>
+    </div>
 
     <article class="car" bind:this={carElement}> 
       <div class="car-inner">
@@ -63,15 +63,15 @@
         <div class="head-light"></div>
         <div class="rear-light"></div>
         <div class="car-exhaust"></div>
-        <button on:click={showProfileInfo} class="profile-picture-container">
+        <button on:click={showProfileInfo} aria-label="show-profile-info" class="profile-picture-container">
           <img class="profile-picture" src="/profiel-foto.svg" alt="profiel foto" width="50" height="50"/>
-          <div class="profile-info">
-            <img class="mugshot" src="/mugshot.jpg" alt="mugshot" width="100" height="100"/>
-            <h1 class="name">{data.persons.name} {data.persons.surname}</h1>
-            <p class="nickname">{data.persons.nickname}</p>
-            <a class="github" href={data.persons.website} target="_blank">Github</a>
-          </div>
         </button>
+        <div class="profile-info">
+          <img class="mugshot" src="/mugshot.jpg" alt="mugshot" width="100" height="100"/>
+          <h1 class="name">{data.persons.name} {data.persons.surname}</h1>
+          <p class="nickname">{data.persons.nickname}</p>
+          <a class="github" href={data.persons.website} target="_blank">Github</a>
+        </div>
       </div>
       <div class="wheel-left wheel">
         <div class="wheel-spike"></div> 
@@ -83,20 +83,20 @@
       </div>
     </article>
 
-    <article class="tree">
+    <div class="tree">
       <div class="tree-inner">
         <div class="tree-top"></div>
         <div class="tree-bottom"></div>
       </div>
-    </article>
+    </div>
 
-    <article class="tree small">
+    <div class="tree small">
       <div class="tree-inner">
         <div class="tree-top"></div>
         <div class="tree-bottom"></div>
       </div>
-    </article>
-  <article class="mountain-container">
+    </div>
+  <div class="mountain-container">
     <div class="mountain">
       <div class="mountain-top">
         <div class="mountain-cap-1"></div>
@@ -118,7 +118,7 @@
         <div class="mountain-cap-3"></div>
       </div>
     </div>
-  </article>
+  </div>
 
   </div>
   <div class="ground">
@@ -161,7 +161,7 @@
     overflow-x: hidden;
   }
 
-  article.cloud {
+  div.cloud {
     background: #fff;
     border-radius: 60px;
     height: 100px;
@@ -171,16 +171,16 @@
     left: 10%;
   }
 
-  article.cloud:nth-of-type(2) {
+  div.cloud:nth-of-type(2) {
     right: 10%;
     left: unset;
   }
 
-  article.cloud div.cloud-inner {
+  div.cloud div.cloud-inner {
     position: relative;
   }
 
-  article.cloud div.small {
+  div.cloud div.small {
     background: #fff;
     border-radius: 100%;
     height: 90px;
@@ -190,7 +190,7 @@
     left: 50px;
   }
 
-  article.cloud div.large {
+  div.cloud div.large {
     background: #fff;
     border-radius: 100%;
     height: 120px;
@@ -288,10 +288,11 @@
     background-color: #ffd;
     border-radius: 100%;
     border: solid 5px #000;
-    bottom: 150px;
+    bottom: 220px;
     cursor: initial;
     opacity: 0;
     transition: 0.3s;
+    left: 90px;
   }
 
   :global(div.profile-info.show) {
@@ -484,7 +485,7 @@
       transform: translate(-50%, -50%);
   }
 
-  article.tree {
+  div.tree {
     position: absolute;
     bottom: 0;
     right: -20%;
@@ -492,15 +493,15 @@
     z-index: 2;
   }
 
-  article.tree.small {
+  div.tree.small {
     margin-right: 70px;
   }
 
-  article.tree div.tree-inner{
+  div.tree div.tree-inner{
     position: relative;
   }
 
-  article.tree div.tree-top{
+  div.tree div.tree-top{
     background: #228B22;
     width: 100px;
     height: 100px;
@@ -510,7 +511,7 @@
     left: -25px;
   }
 
-  article.tree div.tree-bottom{
+  div.tree div.tree-bottom{
     background: #8B4513;
     width: 20px;
     height: 100px;
@@ -519,7 +520,7 @@
     left: 15px;
   }
 
-  article.tree.small div.tree-top{
+  div.tree.small div.tree-top{
     background: #228B22;
     width: 70px;
     height: 70px;
@@ -529,7 +530,7 @@
     left: -25px;
   }
 
-  article.tree.small div.tree-bottom{
+  div.tree.small div.tree-bottom{
     background: #8B4513;
     width: 16px;
     height: 70px;
@@ -543,7 +544,7 @@
     to {right: 200%;}
   } 
 
-  article.mountain-container {
+  div.mountain-container {
     position: absolute;
     bottom: 0;
     right: -20%;
