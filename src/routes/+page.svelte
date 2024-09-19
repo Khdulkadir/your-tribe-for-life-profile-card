@@ -589,10 +589,9 @@
 .mountain-cap-2 { left: -25px; }
 .mountain-cap-3 { left: 5px; }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   div.keys-container {
-    right: 10px;
-    justify-content: center;
+    display: none;
   }
 }
 </style>
