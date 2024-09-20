@@ -96,29 +96,29 @@
         <div class="tree-bottom"></div>
       </div>
     </div>
-  <div class="mountain-container">
-    <div class="mountain">
-      <div class="mountain-top">
-        <div class="mountain-cap-1"></div>
-        <div class="mountain-cap-2"></div>
-        <div class="mountain-cap-3"></div>
+    <div class="mountain-container">
+      <div class="mountain">
+        <div class="mountain-top">
+          <div class="mountain-cap-1"></div>
+          <div class="mountain-cap-2"></div>
+          <div class="mountain-cap-3"></div>
+        </div>
+      </div>
+      <div class="mountain-two">
+        <div class="mountain-top">
+          <div class="mountain-cap-1"></div>
+          <div class="mountain-cap-2"></div>
+          <div class="mountain-cap-3"></div>
+        </div>
+      </div>
+      <div class="mountain-three">
+        <div class="mountain-top">
+          <div class="mountain-cap-1"></div>
+          <div class="mountain-cap-2"></div>
+          <div class="mountain-cap-3"></div>
+        </div>
       </div>
     </div>
-    <div class="mountain-two">
-      <div class="mountain-top">
-        <div class="mountain-cap-1"></div>
-        <div class="mountain-cap-2"></div>
-        <div class="mountain-cap-3"></div>
-      </div>
-    </div>
-    <div class="mountain-three">
-      <div class="mountain-top">
-        <div class="mountain-cap-1"></div>
-        <div class="mountain-cap-2"></div>
-        <div class="mountain-cap-3"></div>
-      </div>
-    </div>
-  </div>
 
   </div>
   <div class="ground">
